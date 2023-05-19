@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import styled from 'styled-components';
 import Body from './components/Body';
+import cards from './data';
 function App() {
 
 
   return (
     <>
-      <Body/>
+      <Body cards = {cards}/>
     </>
   )
 }
