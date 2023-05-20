@@ -1,11 +1,47 @@
 import styled from 'styled-components';
+import Flashcard from './Flashcard';
+import { useState } from 'react';
+
 export default function Questions(props){
     const {id} = props;
+    const {play, setPlay} = props;
+    const {buscaID, setBuscaID} = props;
+    const [display, setDisplay] = useState('none')
+    const [displayQuestion, setDisplayQuestion] = useState('flex')
+
+   
+    console.log(buscaID, 'estou no questions')
+    
+    
+    function minhaFuncao(p) {
+      
+      //setPlay(true);
+     // setBuscaID({id});
+     setDisplay('flex')
+     setDisplayQuestion('none')
+
+      //console.log(p.id)
+      //console.log(buscaID, 'estou no questions')
+      //alteraDisplay()
+   }
+
+
+
+
     return (
-       <SCcontainerQuestions>
+        <>
+       <SCcontainerQuestions display = {displayQuestion}>
             <p> Pergunta {id} </p>
-            <button><ion-icon name="play-outline"></ion-icon></button>
+            <button onClick = {()  => minhaFuncao(props)} ><ion-icon name="play-outline"></ion-icon></button>
         </SCcontainerQuestions>
+        <Flashcard 
+        play = {play} 
+        setPlay = {setPlay} 
+        buscaID = {buscaID}
+        setBuscaID = {setBuscaID}
+        display = {display}
+        setDisplay = {setDisplay}/>
+        </>
     )
 }
 
@@ -17,7 +53,7 @@ const SCcontainerQuestions = styled.div`
     border-radius: 5px;
     margin-bottom: 10px;
     margin-left: 37px;
-    display: flex;
+    display: ${props => props.display};
     justify-content: space-between;
     box-sizing: border-box;
     padding: 20px;

@@ -5,7 +5,9 @@ import logo from '../assets/logo.png'
 
 
 export default function Body(props){
-    const {cards} = props;
+    const {cards, play, setPlay, buscaID, setBuscaID} = props;
+    
+    console.log(play)
     console.log(cards)
     return (
         <SCbody>
@@ -13,9 +15,17 @@ export default function Body(props){
                 <img src={logo}/>
                 <h1>ZapRecall</h1>
             </SClogo>
-            {cards.map( card =>  <Questions id = {card.id}/>)}
+            {cards.map( card =>  
+            <Questions 
+            id = {card.id} 
+            cards = {cards} 
+            play = {play} 
+            setPlay = {setPlay} 
+            buscaID = {buscaID}
+            setBuscaID = {setBuscaID}
+            />)}
             <Flashcard/>
-            <SCfooter><p>0/4 CONCLUIDOS</p></SCfooter>
+            <SCfooter><p>0/8 CONCLUIDOS</p></SCfooter>
         </SCbody>
     )
 }

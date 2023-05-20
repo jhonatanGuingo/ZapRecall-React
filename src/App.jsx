@@ -2,12 +2,20 @@ import { useState } from 'react'
 import styled from 'styled-components';
 import Body from './components/Body';
 import cards from './data';
-function App() {
 
+function App() {
+  const [play, setPlay] = useState(false);
+  const [buscaID, setBuscaID] = useState('');
+  console.log(play, 'estou no app')
 
   return (
     <>
-      <Body cards = {cards}/>
+      <Body 
+      cards = {cards} 
+      play = {play} 
+      setPlay = {setPlay} 
+      buscaID = {buscaID}
+      setBuscaID = {setBuscaID}/>
     </>
   )
 }
