@@ -3,11 +3,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 export default function Flashcard(props){
     const {cards}=props;
-    const {play, setPlay} = props;
-    const {buscaID, setBuscaID} = props;
+    const {contador, setContador} = props;
+    const [traco, setTraco] = useState('none')
     const [displayQuestion, setDisplayQuestion] = useState('none')
     const [displayDeck, setDisplayDeck] = useState('flex')
     const [displayAnswer, setDisplayAnswer] = useState('none')
+    const [answered, setAnswered] = useState(false)
+    const [color, setColor] = useState('black')
+    const [icon, setIcon] = useState("play-outline")
     console.log('estou no flash', cards)
     function viraPergunta(p) {
       
@@ -23,11 +26,35 @@ export default function Flashcard(props){
 
       }
 
+      function verificarResposta(num){
+        const id = num;
+        setDisplayQuestion('none')
+        setDisplayDeck('flex')
+        setDisplayAnswer('none')
+        setTraco('line-through')
+        setAnswered(true)
+        setContador(contador + 1)
+        console.log(answered, 'estou no flash')
+       if (id === 1){
+            setColor('red')
+            setIcon("close-circle")
+            console.log(color, 'color test')
+        }else if  (id === 2) {
+            setColor('orange')
+            setIcon("help-circle")
+            console.log(color, 'color test')
+        }else if  (id === 3) {
+            setColor('green')
+            setIcon("checkmark-circle")
+            console.log(color, 'color test')
+        }
+      }
+
     return (
         <>
-        <SCcontainerQuestions display = {displayDeck}>
+        <SCcontainerQuestions display = {displayDeck} color = {color} traco = {traco}>
             <p> Pergunta {cards.id} </p>
-            <button onClick = {()  => viraPergunta(props)} ><ion-icon name="play-outline"></ion-icon></button>
+            <button disabled = {answered === true ? true : false} onClick = {()  => viraPergunta(props)} ><ion-icon name={icon}></ion-icon></button>
         </SCcontainerQuestions>
 
         <SCflashCard display = {displayQuestion}>
@@ -38,9 +65,9 @@ export default function Flashcard(props){
         <SCFlashAnswer display = {displayAnswer}>
             <p>{cards.answer}</p>
             <SCDivContainer>
-                <SCDivNot>Não lembrei!</SCDivNot>
-                <SCDivAlso>Quase não lembrei!</SCDivAlso>
-                <SCDivZap>Zap!</SCDivZap>
+                <button  onClick = {()  => verificarResposta(1)}><SCDivNot><p>Não lembrei!</p></SCDivNot></button>
+                <button  onClick = {()  => verificarResposta(2)}><SCDivAlso><p>Quase não lembrei!</p></SCDivAlso></button>
+                <button  onClick = {()  => verificarResposta(3)}><SCDivZap><p>Zap!</p></SCDivZap></button>
             </SCDivContainer>
         </SCFlashAnswer>
         </>
@@ -51,6 +78,7 @@ const SCcontainerQuestions = styled.div`
     width: 300px;
     height: 65px;
     background: #FFFFFF;
+    color: ${props => props.color};
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     margin-bottom: 10px;
@@ -66,17 +94,26 @@ const SCcontainerQuestions = styled.div`
         background-color: inherit;
         cursor: pointer;
     }
+    p{
+        text-decoration-line: ${props => props.traco};
+        font-family: 'Recursive';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+    }
     ion-icon{
         width: 20px;
         height: 23px;
-        color: #333333;
+        color:${props => props.color};
+        
     }
 `
 const SCFlashAnswer = styled.div`
     display: ${props => props.display};
     flex-direction: column;
     width: 299px;
-    height: 131px;
+    height: auto;
     background: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
@@ -96,18 +133,63 @@ const SCFlashAnswer = styled.div`
 const SCDivContainer = styled.div`
     display: flex;
     justify-content: space-around;
+    button {
+        box-shadow: none;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+    }
+
 `
 const SCDivNot = styled.div`
     width: 85.17px;
     height: 37.17px;
     background: #FF3030;
     border-radius: 5px;
+    display: flex;
+    button {
+        box-shadow: none;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+    }
+    p {
+        margin: auto;
+        font-family: 'Recursive';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
 `
 const SCDivAlso = styled.div`
     width: 85.17px;
     height: 37.17px;
     background: #FF922E;
     border-radius: 5px;
+    display: flex;
+    button {
+        box-shadow: none;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+    }
+    p {
+        margin: auto;
+        font-family: 'Recursive';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
 `
 
 const SCDivZap = styled.div`
@@ -115,6 +197,19 @@ const SCDivZap = styled.div`
     height: 37.17px;
     background: #2FBE34;
     border-radius: 5px;
+    display: flex;
+    p {
+        margin: auto;
+        font-family: 'Recursive';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
 `
 
 const SCflashCard = styled.div`

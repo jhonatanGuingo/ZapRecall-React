@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import Flashcard from './Flashcard';
 import logo from '../assets/logo.png'
 import Deck from './Deck';
+import { useState } from 'react';
 
 
 export default function Body(props){
     const {cards, play, setPlay, buscaID, setBuscaID} = props;
-    
+    const [contador, setContador] = useState(0);
  
     console.log(cards, 'estou no body')
     return (
@@ -17,6 +18,8 @@ export default function Body(props){
             </SClogo>
              
             <Deck 
+            contador = {contador}
+            setContador = {setContador}
             cards = {cards} 
             play = {play} 
             setPlay = {setPlay} 
@@ -24,7 +27,7 @@ export default function Body(props){
             setBuscaID = {setBuscaID}
             />
             
-            <SCfooter><p>0/8 CONCLUIDOS</p></SCfooter>
+            <SCfooter><p>{contador}/8 CONCLUIDOS</p></SCfooter>
         </SCbody>
     )
 }
@@ -74,6 +77,15 @@ const SCfooter = styled.div `
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     p{
+        font-family: 'Recursive';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        /* identical to box height */
+
+
+        color: #333333;
         margin: auto;
     }
 `
