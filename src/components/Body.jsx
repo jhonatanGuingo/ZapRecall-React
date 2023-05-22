@@ -36,13 +36,14 @@ export default function Body(props){
 const SCbody = styled.div`
     background: #FB6B6B;
     border: 1px solid #DBDBDB;
-    width: 375px;
-    height: 100%;
+   
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     position: relative;
-
+    
+    align-items: center;
+   
 `
 const SClogo = styled.div`
     display: flex;
@@ -68,14 +69,15 @@ const SClogo = styled.div`
 
 `
 const SCfooter = styled.div `
+    display: flex;
     position: absolute;
     bottom: 0px;
     right: 0px;
-    width: 375px;
+    width: 100%;
     height: 70px;
     background: #FFFFFF;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-    display: flex;
+    
     p{
         font-family: 'Recursive';
         font-style: normal;

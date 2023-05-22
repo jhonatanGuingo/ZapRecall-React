@@ -118,6 +118,8 @@ const SCFlashAnswer = styled.div`
     flex-direction: column;
     width: 299px;
     height: auto;
+    box-sizing: border-box;
+    padding: 5px;
     background: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
@@ -131,7 +133,8 @@ const SCFlashAnswer = styled.div`
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
-        margin-left: 15px;       
+        margin-left: 15px; 
+        margin-bottom: 10px ;
     }
 `
 const SCDivContainer = styled.div`
@@ -221,6 +224,8 @@ const SCflashCard = styled.div`
     width: 299px;
     height: 131px;
     background: #FFFFD5;
+    box-sizing: border-box;
+    padding: 10px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     margin-bottom: 10px;
