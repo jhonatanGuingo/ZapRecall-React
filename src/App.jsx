@@ -6,7 +6,7 @@ import cards from './data';
 function App() {
   const [play, setPlay] = useState(false);
   const [buscaID, setBuscaID] = useState('');
-  console.log(play, 'estou no app')
+
 
   return (
     <>
