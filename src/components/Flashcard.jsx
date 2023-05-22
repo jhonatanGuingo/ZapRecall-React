@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 export default function Flashcard(props){
     const {cards}=props;
     const {contador, setContador} = props;
@@ -11,6 +11,7 @@ export default function Flashcard(props){
     const [answered, setAnswered] = useState(false)
     const [color, setColor] = useState('black')
     const [icon, setIcon] = useState("play-outline")
+    const [dataTest, setDataTest] = useState('')
     console.log('estou no flash', cards)
     function viraPergunta(p) {
       
@@ -38,36 +39,39 @@ export default function Flashcard(props){
        if (id === 1){
             setColor('red')
             setIcon("close-circle")
+            setDataTest('no-icon')
             console.log(color, 'color test')
         }else if  (id === 2) {
             setColor('orange')
             setIcon("help-circle")
+            setDataTest('partial-icon')
             console.log(color, 'color test')
         }else if  (id === 3) {
             setColor('green')
             setIcon("checkmark-circle")
+            setDataTest('zap-icon')
             console.log(color, 'color test')
         }
       }
 
     return (
         <>
-        <SCcontainerQuestions display = {displayDeck} color = {color} traco = {traco}>
-            <p> Pergunta {cards.id} </p>
-            <button disabled = {answered === true ? true : false} onClick = {()  => viraPergunta(props)} ><ion-icon name={icon}></ion-icon></button>
+        <SCcontainerQuestions data-test="flashcard" display = {displayDeck} color = {color} traco = {traco}>
+            <p data-test="flashcard-text"> Pergunta {cards.id} </p>
+            <button  disabled = {answered} data-test="play-btn" onClick = {()  => viraPergunta(props)} ><ion-icon data-test ={dataTest} name={icon}></ion-icon></button>
         </SCcontainerQuestions>
 
         <SCflashCard display = {displayQuestion}>
-           <p> {cards.question} </p>
-            <button onClick = {()  => viraResposta(props)}><ion-icon name="repeat-outline"></ion-icon></button>
+           <p data-test="flashcard-text"> {cards.question} </p>
+            <button data-test="turn=btn" onClick = {()  => viraResposta(props)}><ion-icon name="repeat-outline"></ion-icon></button>
         </SCflashCard>
 
         <SCFlashAnswer display = {displayAnswer}>
-            <p>{cards.answer}</p>
+            <p data-test="flashcard-text">{cards.answer}</p>
             <SCDivContainer>
-                <button  onClick = {()  => verificarResposta(1)}><SCDivNot><p>Não lembrei!</p></SCDivNot></button>
-                <button  onClick = {()  => verificarResposta(2)}><SCDivAlso><p>Quase não lembrei!</p></SCDivAlso></button>
-                <button  onClick = {()  => verificarResposta(3)}><SCDivZap><p>Zap!</p></SCDivZap></button>
+                <button data-test = "no-btn" onClick = {()  => verificarResposta(1)}><SCDivNot><p>Não lembrei!</p></SCDivNot></button>
+                <button data-test = "partial-btn" onClick = {()  => verificarResposta(2)}><SCDivAlso><p>Quase não lembrei!</p></SCDivAlso></button>
+                <button data-test = "zap-btn" onClick = {()  => verificarResposta(3)}><SCDivZap><p>Zap!</p></SCDivZap></button>
             </SCDivContainer>
         </SCFlashAnswer>
         </>

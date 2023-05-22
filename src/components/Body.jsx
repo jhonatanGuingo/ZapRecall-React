@@ -27,7 +27,7 @@ export default function Body(props){
             setBuscaID = {setBuscaID}
             />
             
-            <SCfooter><p>{contador}/8 CONCLUIDOS</p></SCfooter>
+            <SCfooter><p data-test="footer">{contador}/{cards.length} CONCLUIDOS</p></SCfooter>
         </SCbody>
     )
 }
