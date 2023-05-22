@@ -241,6 +241,9 @@ const SCflashCard = styled.div`
         margin-left: 15px;
     }
     button {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
         box-shadow: none;
         border: none;
         background-color: inherit;
